@@ -235,8 +235,10 @@
             };
             
             try {
-                // שליחת בקשה אמיתית ל-Zapier
-                const response = await fetch(ZAPIER_WEBHOOK_URL, {
+                // שליחת בקשה אמיתית ל-Zapier דרך CORS Proxy
+                const corsProxyUrl = 'https://corsproxy.io/?';
+                const zapierWebhookUrl = encodeURIComponent(ZAPIER_WEBHOOK_URL);
+                const response = await fetch(corsProxyUrl + zapierWebhookUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(webhookData)
